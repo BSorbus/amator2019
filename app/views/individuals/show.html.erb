@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @individual.department %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @individual.number %>
+</p>
+
+<p>
+  <strong>Date of issue:</strong>
+  <%= @individual.date_of_issue %>
+</p>
+
+<p>
+  <strong>Valid to:</strong>
+  <%= @individual.valid_to %>
+</p>
+
+<p>
+  <strong>Call sign:</strong>
+  <%= @individual.call_sign %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @individual.category %>
+</p>
+
+<p>
+  <strong>Transmitter power:</strong>
+  <%= @individual.transmitter_power %>
+</p>
+
+<p>
+  <strong>Station location:</strong>
+  <%= @individual.station_location %>
+</p>
+
+<%= link_to 'Edit', edit_individual_path(@individual) %> |
+<%= link_to 'Back', individuals_path %>

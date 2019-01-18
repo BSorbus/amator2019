@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta lang="pl">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "UKE Radioamator" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UKE Radioamator" %>">
+
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= favicon_link_tag asset_path('favicon.ico'), :rel => 'shortcut icon', :type => "image/x-icon" %>
+
+    <%= yield(:javascript) %> 
+
+  </head>
+
+  <body>
+    <div class="content">
+      <%= render 'layouts/header' %>
+      <main>
+        <%= render 'layouts/messages' %>
+        <%= yield(:form_errors) %>       
+        <%= yield %>
+      </main>
+    </div>
+    <%= render 'layouts/footer' %>
+  </body>
+</html>

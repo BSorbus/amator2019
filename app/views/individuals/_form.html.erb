@@ -1,0 +1,57 @@
+<%= form_with(model: individual, local: true) do |form| %>
+  <% if individual.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(individual.errors.count, "error") %> prohibited this individual from being saved:</h2>
+
+      <ul>
+      <% individual.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :department %>
+    <%= form.text_field :department %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_issue %>
+    <%= form.date_select :date_of_issue %>
+  </div>
+
+  <div class="field">
+    <%= form.label :valid_to %>
+    <%= form.date_select :valid_to %>
+  </div>
+
+  <div class="field">
+    <%= form.label :call_sign %>
+    <%= form.text_field :call_sign %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.text_field :category %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transmitter_power %>
+    <%= form.number_field :transmitter_power %>
+  </div>
+
+  <div class="field">
+    <%= form.label :station_location %>
+    <%= form.text_field :station_location %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
