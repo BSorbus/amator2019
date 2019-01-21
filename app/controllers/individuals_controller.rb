@@ -1,6 +1,8 @@
 class IndividualsController < ApplicationController
   before_action :set_individual, only: [:show, :edit, :update, :destroy]
 
+  caches_page :index, :gzip => :best_speed
+
   # GET /individuals
   # GET /individuals.json
   def index

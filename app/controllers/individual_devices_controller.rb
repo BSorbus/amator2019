@@ -1,6 +1,8 @@
 class IndividualDevicesController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy]
 
+  caches_page :index, :gzip => :best_speed
+
   # GET /clubs
   # GET /clubs.json
   def index

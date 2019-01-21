@@ -12,8 +12,8 @@ en:
       contact_phone: '+48 22 53 49 190'
       contact_fax: '+48 22 53 49 190'
       links: 'Links'
-  visitors:
-    index:
+  static_pages:
+    home:
       title: 'Register of radio amateur licenses'
   individuals:
     index:

@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
-  resources :individuals, only: [:index, :show]
-  resources :clubs, only: [:index, :show]
-  resources :individual_devices, only: [:index, :show]
-  resources :club_devices, only: [:index, :show]
 
-  get 'visitors/index'
+  scope "(:locale)", locale: /en|pl/ do
+	  resources :books
+	  resources :individuals, only: [:index, :show]
+	  resources :clubs, only: [:index, :show]
+	  resources :individual_devices, only: [:index, :show]
+	  resources :club_devices, only: [:index, :show]
 
-  root 'visitors#index'
+	  get 'static_pages/home'
+    root to: 'static_pages#home'
+	end
+
 end

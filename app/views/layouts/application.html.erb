@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html>
   <head>
     <meta charset="UTF-8">
-    <meta lang="pl">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "UKE Radioamator" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UKE Radioamator" %>">
@@ -19,13 +18,13 @@
 
   <body>
     <div class="content">
-      <%= render 'layouts/header' %>
+      <%= render 'layouts/header', cached: true %>
       <main>
         <%= render 'layouts/messages' %>
         <%= yield(:form_errors) %>       
         <%= yield %>
       </main>
     </div>
-    <%= render 'layouts/footer' %>
+    <%= render 'layouts/footer', cached: true %>
   </body>
 </html>

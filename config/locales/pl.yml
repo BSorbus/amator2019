@@ -12,8 +12,8 @@ pl:
       contact_phone: '+48 22 53 49 190'
       contact_fax: '+48 22 53 49 190'
       links: 'Zobacz też'
-  visitors:
-    index:
+  static_pages:
+    home:
       title: 'Rejestr radioamatorskich pozwoleń radiowych'
   individuals:
     index:
