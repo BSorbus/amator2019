@@ -16,11 +16,11 @@ en:
       confirm_destroy: 'Are you sure delete: "%{data}"?'
       destroy: " Delete"
       destroy_account: "Cancel my account"
-      new: " New"
-      edit: " Edit"
-      index: " Index"
-      send_email: " Send email"
-      download: " Download"
+      new: "New"
+      edit: "Edit"
+      index: "Index"
+      send_email: "Send email"
+      download: "Download"
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

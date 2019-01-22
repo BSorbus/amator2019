@@ -16,11 +16,11 @@ pl:
       confirm_destroy: 'Na pewno chcesz usunąć wpis: "%{data}"?'
       destroy: " Usuń"
       destroy_account: "Usuń moje konto"
-      new: " Nowy"
-      edit: " Edycja"
-      index: " Lista"
-      send_email: " Wyślij email"
-      download: " Pobierz"
+      new: "Nowy"
+      edit: "Edycja"
+      index: "Lista"
+      send_email: "Wyślij email"
+      download: "Pobierz"
     titles:
       edit: "Edycja %{model}"
       save: "Zapisz %{model}"

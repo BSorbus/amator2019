@@ -1,5 +1,5 @@
 require 'csv'
-class Club < ApplicationRecord
+class ClubDevice < ApplicationRecord
 
   def fullname
     "#{number}, #{call_sign}"
@@ -22,9 +22,11 @@ class Club < ApplicationRecord
   # rubocop:disable MethodLength
   def self.to_csv
     CSV.generate(headers: false, col_sep: ';', converters: nil, skip_blanks: false, force_quotes: false) do |csv|
-      columns_header = %w(number valid_to call_sign category transmitter_power applicant_name applicant_city applicant_street
-                          applicant_house applicant_number enduser_name enduser_city enduser_street
-                          enduser_house enduser_number station_city station_street station_house station_number)
+      columns_header = %w(number valid_to call_sign category transmitter_power name_type_station
+                          emission input_frequency output_frequency
+                          applicant_name applicant_city applicant_street applicant_house applicant_number
+                          enduser_name enduser_city enduser_street enduser_house enduser_number
+                          station_city station_street station_house station_number)
       csv << columns_header
       all.each do |rec|
         csv << [rec.number.strip,
@@ -32,6 +34,10 @@ class Club < ApplicationRecord
                 rec.call_sign,
                 rec.category,
                 rec.transmitter_power,
+                rec.name_type_station,
+                rec.emission,
+                rec.input_frequency,
+                rec.output_frequency,
                 rec.applicant_name,
                 rec.applicant_city,
                 rec.applicant_street,
@@ -51,12 +57,12 @@ class Club < ApplicationRecord
   end
 
   def self.load_from_pwid(doc)
-    Club.destroy_all
-    doc.xpath("//*[local-name()='wyszukajPozwoleniaKluboweResponse']").each do |resp|
+    ClubDevice.destroy_all
+    doc.xpath("//*[local-name()='wyszukajPozwoleniaBezobslugoweResponse']").each do |resp|
       resp.xpath("./*[local-name()='return']").each do |ret|
         ret.xpath("./*[local-name()='pozwolenie']").each do |pozwol|
 
-          if pozwol.xpath("./*[local-name()='status']").text == 'Aktualna'
+          if pozwol.xpath("./*[local-name()='status']").text == 'Aktualna' && pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='fizyczny']").text == 'false'
 
             applicant_city = ''
             applicant_street = ''
@@ -87,15 +93,19 @@ class Club < ApplicationRecord
               end 
             end
 
-            sleep 0.25
+            #sleep 0.25
 
-            club = Club.create(
+            club_mf_device = ClubDevice.create(
               number:             pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? pozwol.xpath("./*[local-name()='sygnaturaEsod']").text : pozwol.xpath("./*[local-name()='numer']").text,
               date_of_issue:      pozwol.xpath("./*[local-name()='waznaOd']").text,
               valid_to:           pozwol.xpath("./*[local-name()='waznaDo']").text,
               call_sign:          pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='znak']").text,
               category:           pozwol.xpath("./*[local-name()='wniosek']").xpath("./*[local-name()='kategoria']").text,
               transmitter_power:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='moc']").text,
+              name_type_station:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='przeznaczenie']").map(&:text).uniq.join(", "),
+              emission:           pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='emisja']").map(&:text).uniq.join(", "),
+              input_frequency:    pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='czestotliwoscOdb']").map(&:text).uniq.join(", "),
+              output_frequency:   pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='czestotliwoscNad']").map(&:text).uniq.join(", "),
               station_city:       pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='miejscowosc']").text,
               station_street:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='ulica']").text,
               station_house:      pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrDoku']").text,
@@ -112,9 +122,9 @@ class Club < ApplicationRecord
               enduser_number:     enduser_number
             )
 
-            puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text + "   GEOCODER:   lat: #{club.lat} lng: #{club.lng}"
+            puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text + "   GEOCODER:   lat: #{club_mf_device.lat} lng: #{club_mf_device.lng}"
           else
-            puts '******************** NIEAKTUALNE ********************'
+            puts '******************** NIEAKTUALNE lub FIZYCZNY=true ********************'
             puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text
             puts pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? "#{pozwol.xpath("./*[local-name()='sygnaturaEsod']").text}" : "#{pozwol.xpath("./*[local-name()='numer']").text}"
           end

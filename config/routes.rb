@@ -1,11 +1,25 @@
 Rails.application.routes.draw do
 
   scope "(:locale)", locale: /en|pl/ do
-	  resources :books
-	  resources :individuals, only: [:index, :show]
-	  resources :clubs, only: [:index, :show]
-	  resources :individual_devices, only: [:index, :show]
-	  resources :club_devices, only: [:index, :show]
+    resources :individuals, only: [:index, :show] do
+      #post 'datatables_index', on: :collection
+      get 'export', on: :collection
+    end
+
+    resources :clubs, only: [:index, :show] do
+      #post 'datatables_index', on: :collection
+      get 'export', on: :collection
+    end
+
+    resources :individual_devices, only: [:index, :show] do
+      #post 'datatables_index', on: :collection
+      get 'export', on: :collection
+    end
+
+    resources :club_devices, only: [:index, :show] do
+      #post 'datatables_index', on: :collection
+      get 'export', on: :collection
+    end
 
 	  get 'static_pages/home'
     root to: 'static_pages#home'
