@@ -50,7 +50,7 @@ module PwidModule
   def self.pwid_whenever
     puts '----------------------------------------------------------------'
     puts 'RUN pwid_whenever...'
-    #start_run = Time.current
+    start_run = Time.current
     load_individuals
     load_clubs
     load_devices

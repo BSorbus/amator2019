@@ -66,3 +66,4 @@ gem "actionpack-page_caching"
 gem "actionpack-action_caching"
 
 gem 'whenever', require: false
+gem 'mina-whenever', require: false
