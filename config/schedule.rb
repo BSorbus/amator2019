@@ -10,6 +10,6 @@ set :output, "#{Rails.root}/log/cron_log.log"
 #  rake "cronjobs:pwid_sync"
 #end
 
-every '30 18 * * 1-5' do
+every '30 17 * * 1-5' do
   rake "cronjobs:pwid_sync"
 end
