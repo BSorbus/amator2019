@@ -1,5 +1,15 @@
 require 'csv'
+require 'pit'
+
 class Club < ApplicationRecord
+
+  before_validation :geocode_lat_lng 
+
+  def geocode_lat_lng
+    if (self.lat.nil? || self.lat == 0.0 || self.lng.nil? || self.lng == 0.0 )
+      self.lat, self.lng = PitModule::Geocoder::localize_x_y("#{self.full_station_address}") unless self.full_station_address.blank?
+    end
+  end
 
   def fullname
     "#{number}, #{call_sign}"
@@ -11,7 +21,7 @@ class Club < ApplicationRecord
 
   # for Google
   def full_station_address
-    "PL, #{station_city}, #{station_street}"
+    "#{self.station_city} #{self.station_street} #{self.station_house}"
   end
 
   # for Yandex
@@ -24,7 +34,7 @@ class Club < ApplicationRecord
     CSV.generate(headers: false, col_sep: ';', converters: nil, skip_blanks: false, force_quotes: false) do |csv|
       columns_header = %w(number valid_to call_sign category transmitter_power applicant_name applicant_city applicant_street
                           applicant_house applicant_number enduser_name enduser_city enduser_street
-                          enduser_house enduser_number station_city station_street station_house station_number)
+                          enduser_house enduser_number station_city station_street station_house station_number lat lng)
       csv << columns_header
       all.each do |rec|
         csv << [rec.number.strip,
@@ -45,7 +55,9 @@ class Club < ApplicationRecord
                 rec.station_city,
                 rec.station_street,
                 rec.station_house,
-                rec.station_number]
+                rec.station_number,
+                rec.lat,
+                rec.lng]
       end
     end.encode('WINDOWS-1250')
   end
