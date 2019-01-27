@@ -1,7 +1,7 @@
 class DatatablesController < ApplicationController
 
 PL =  {
-        "sProcessing":   "Czekaj...",
+        "sProcessing":   "<span class='fa fa-spinner fa-spin fa-4x' style='color:red;'></span>",
         "sLengthMenu":   "<span class='fa fa-arrows-alt-v'></span> _MENU_",
         "sZeroRecords":  "Nie znaleziono pasujących pozycji",
         "sEmptyTable":   "Brak danych",
@@ -25,7 +25,7 @@ PL =  {
       }      
 
 EN =  {
-        "sProcessing":     "Wait...",
+        "sProcessing":     "<span class='fa fa-spinner fa-spin fa-4x' style='color:red;'></span>",
         "sLengthMenu":     "<span class='fa fa-arrows-alt-v'></span> _MENU_",
         "sZeroRecords":    "No matching records found",
         "sEmptyTable":     "No data available in table",
