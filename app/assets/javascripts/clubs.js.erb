@@ -6,21 +6,7 @@ $(document).ready(function() {
     titleAttr: 'Export',
     className: 'btn btn-default',
     action: function ( e, dt, button, config ) {
-      var data;
-      $.ajax({
-        type: "GET",  
-        url: $('#clubs-datatable').data('export_csv_url'),
-        dataType: "text",       
-        success: function(response)  
-        {
-          var data = response;
-          $.fn.dataTable.fileSave(
-            new Blob( [ data ], { type: 'text/csv;charset=utf-8;' } ),
-            'clubs.csv'
-          );
-
-        }   
-      });
+      window.location = $('#clubs-datatable').data('export_csv_url');
     }  
   };
 
