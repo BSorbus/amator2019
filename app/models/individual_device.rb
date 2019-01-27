@@ -23,7 +23,7 @@ class IndividualDevice < ApplicationRecord
                 rec.output_frequency,
                 rec.station_location]
       end
-    end.encode('WINDOWS-1250')
+    end.encode('UTF-8')
   end
 
   def self.load_from_pwid(doc)

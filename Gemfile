@@ -56,8 +56,10 @@ gem 'bootstrap-sass', '3.3.7'
 gem 'font_awesome5_rails'
 gem 'jquery-rails'
 
-gem 'redis-rails'
+gem 'jquery-datatables', '= 1.10.16' #1.10.19 jakis problem z wyswietlaniem strzalek sortowania
+gem 'ajax-datatables-rails' #, '= 0.4.0' jeżeli wywala się na custom_filter
 
+gem 'redis-rails'
 gem "hiredis"
 gem "redis", "~> 4.0"
 

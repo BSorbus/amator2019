@@ -12,7 +12,10 @@ class ClubsController < ApplicationController
   # GET /clubs
   # GET /clubs.json
   def index
-    #@clubs = Individual.all
+    respond_to do |format|
+      format.html
+      format.json { render json: ClubDatatable.new(params) }
+    end
   end
 
   # GET /clubs/1

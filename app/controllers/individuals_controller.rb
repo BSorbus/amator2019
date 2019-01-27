@@ -12,7 +12,10 @@ class IndividualsController < ApplicationController
   # GET /individuals
   # GET /individuals.json
   def index
-    #@individuals = Individual.all
+    respond_to do |format|
+      format.html
+      format.json { render json: IndividualDatatable.new(params) }
+    end
   end
 
   # GET /individuals/1

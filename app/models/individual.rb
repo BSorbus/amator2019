@@ -18,7 +18,7 @@ class Individual < ApplicationRecord
                 rec.transmitter_power,
                 rec.station_location]
      end
-    end.encode('WINDOWS-1250')
+    end.encode('UTF-8')
   end
 
   # Status decyzji – kod ze słownika DecyzjaStatus:

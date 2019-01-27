@@ -12,7 +12,10 @@ class IndividualDevicesController < ApplicationController
   # GET /individual_devices
   # GET /individual_devices.json
   def index
-    #@individual_devices = Individual.all
+    respond_to do |format|
+      format.html
+      format.json { render json: IndividualDeviceDatatable.new(params) }
+    end
   end
 
   # GET /individual_devices/1

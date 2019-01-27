@@ -59,7 +59,7 @@ class Club < ApplicationRecord
                 rec.lat,
                 rec.lng]
       end
-    end.encode('WINDOWS-1250')
+    end.encode('UTF-8')
   end
 
   def self.load_from_pwid(doc)
