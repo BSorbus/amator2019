@@ -1,6 +1,6 @@
 class ClubDevicesController < ApplicationController
 
-  caches_page :index, :gzip => :best_speed
+  # caches_page :index, :gzip => :best_speed
 
   def export
     @data = ClubDevice.all
