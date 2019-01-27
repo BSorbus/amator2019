@@ -63,8 +63,8 @@ gem 'redis-rails'
 gem "hiredis"
 gem "redis", "~> 4.0"
 
-gem "actionpack-page_caching"
-gem "actionpack-action_caching"
+#gem "actionpack-page_caching"
+#gem "actionpack-action_caching"
 
 gem 'whenever', require: false
 
