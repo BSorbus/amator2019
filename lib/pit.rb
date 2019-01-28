@@ -2,8 +2,10 @@ require 'net/http'
 
 module PitModule
 
-  #API_URL = "http://testpit2map.uke.gov.pl/api/v1/wyszukiwarka/adres_public"
-  API_URL = "http://10.40.6.11/geokoder"
+  # API_URL = "http://testpit2map.uke.gov.pl/api/v1/wyszukiwarka/adres_public"
+  # API_URL = "http://10.40.6.11/geokoder"
+  # In F5 address -> cluster to 10.40.6.10 i 10.40.6.11
+  API_URL = "http://testpit2map.uke.gov.pl/geokoder"
 
   class Geocoder
     include ActiveModel::Model
