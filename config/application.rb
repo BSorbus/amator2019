@@ -26,7 +26,7 @@ module Amator2018
 
     config.time_zone = 'Warsaw'
 
-    #config.middleware.use Rack::Attack
+    config.middleware.use Rack::Attack
     config.i18n.default_locale = :pl
     config.i18n.available_locales = [:pl, :en]
 
