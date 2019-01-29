@@ -21,7 +21,10 @@ class IndividualsController < ApplicationController
   # GET /individuals/1
   # GET /individuals/1.json
   def show
-    #@individual = Individual.find(params[:id])
+    @individual = Individual.find(params[:id])
+    respond_to do |format|
+      format.html 
+    end
   end
 
 end

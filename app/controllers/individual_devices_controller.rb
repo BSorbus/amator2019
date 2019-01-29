@@ -21,7 +21,10 @@ class IndividualDevicesController < ApplicationController
   # GET /individual_devices/1
   # GET /individual_devices/1.json
   def show
-    #@individual_device = Individual.find(params[:id])
+    @individual_device = IndividualDevice.find(params[:id])
+    respond_to do |format|
+      format.html 
+    end
   end
 
 end

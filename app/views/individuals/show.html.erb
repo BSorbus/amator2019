@@ -1,44 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="center">
+        <span class="fa fa-user glyp-index-title" aria-hidden="true"></span>
+        <span class="index-title"><%= @individual.try(:number) %></span>
+      </h3>
+    </div> <!--/col-sm-12 -->
+  </div> <!--/row -->
 
-<p>
-  <strong>Department:</strong>
-  <%= @individual.department %>
-</p>
+  <%= render partial: "shared/basic_info",        locals: {partial_data: @individual} %>
+  <%= render partial: "shared/station_info",      locals: {partial_data: @individual} %>
 
-<p>
-  <strong>Number:</strong>
-  <%= @individual.number %>
-</p>
+  <br>
+  <%= link_to individuals_path, class: "btn btn-default" do %>
+    <span class="fa fa-list"></span>
+    <%= t("helpers.links.index") %>
+  <% end %>
 
-<p>
-  <strong>Date of issue:</strong>
-  <%= @individual.date_of_issue %>
-</p>
+</div> <!--/container -->
 
-<p>
-  <strong>Valid to:</strong>
-  <%= @individual.valid_to %>
-</p>
-
-<p>
-  <strong>Call sign:</strong>
-  <%= @individual.call_sign %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @individual.category %>
-</p>
-
-<p>
-  <strong>Transmitter power:</strong>
-  <%= @individual.transmitter_power %>
-</p>
-
-<p>
-  <strong>Station location:</strong>
-  <%= @individual.station_location %>
-</p>
-
-<%= link_to 'Edit', edit_individual_path(@individual) %> |
-<%= link_to 'Back', individuals_path %>

@@ -16,7 +16,7 @@ class IndividualDatatable < AjaxDatatablesRails::ActiveRecord
     records.map do |record|
       {
         id:                 record.id,
-        number:             record.number,
+        number:             record.number_as_link(params[:locale]),
         valid_to:           record.valid_to,
         call_sign:          record.call_sign,
         category:           record.category,

@@ -21,7 +21,10 @@ class ClubsController < ApplicationController
   # GET /clubs/1
   # GET /clubs/1.json
   def show
-    #@club = Individual.find(params[:id])
+    @club = Club.find(params[:id])
+    respond_to do |format|
+      format.html 
+    end
   end
 
 end

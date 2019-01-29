@@ -2,6 +2,7 @@ require 'csv'
 require 'pit'
 
 class Club < ApplicationRecord
+  delegate :url_helpers, to: 'Rails.application.routes'
 
   before_validation :geocode_lat_lng 
 
@@ -11,23 +12,14 @@ class Club < ApplicationRecord
     end
   end
 
-  def fullname
-    "#{number}, #{call_sign}"
+  def number_as_link( loc )
+    "<a href=#{url_helpers.club_path(self.id, locale: loc)}>#{self.number}</a>".html_safe
   end
 
-  def fullname_with_station_address
-    "#{number}, #{call_sign} (#{station_city}, #{station_street})"
-  end
-
-  # for Google
+  # for PitModule:Geokoder
   def full_station_address
     "#{self.station_city} #{self.station_street} #{self.station_house}"
   end
-
-  # for Yandex
-  #def full_station_address
-  #  "#{station_street}, #{station_city}, Poland"
-  #end
 
   # rubocop:disable MethodLength
   def self.to_csv

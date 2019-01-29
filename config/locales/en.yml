@@ -20,25 +20,38 @@ en:
       title: 'A list of authorizations issued for private persons'
       navbar: 'Individuals'
     show:
-      title: 'Individual -> Show'
+      title: 'Individual'
   clubs:
     index:
       title: 'A list of authorizations issued for legal entity'
       navbar: 'Clubs'
     show:
-      title: 'Club -> Show'
+      title: 'Club'
   individual_devices:
     index:
       title: 'A list of authorizations issued for private persons - automatic stations'
       navbar: 'Individual automatic stations'
     show:
-      title: 'Osoba -> Show'
+      title: 'Individual automatic station'
   club_devices:
     index:
       title: 'A list of authorizations issued for legal entity - automatic stations'
       navbar: 'Club automatic stations'
     show:
-      title: 'Club -> Show'
+      title: 'Club automatic station'
+  shared:
+    basic_info:
+      fieldset_title: 'Basic information'
+    additional_info:
+      fieldset_title: 'Additional information'
+    station_info:
+      fieldset_title: 'Station'
+    station_full_info:
+      fieldset_title: 'Station'
+    applicant_info:
+      fieldset_title: 'Applicant'
+    enduser_info:
+      fieldset_title: 'Enduser'    
   activerecord:
     models:
       individual: 'Individual'
@@ -53,7 +66,7 @@ en:
         call_sign: 'Call sign'
         category: 'Class'
         transmitter_power: 'Power'
-        station_location: 'Station location'
+        station_location: 'Station'
       club:
         number: 'Number'
         date_of_issue: 'Date of issue'
@@ -62,19 +75,35 @@ en:
         category: 'Category'
         transmitter_power: 'Power'
         enduser_name: 'Enduser - Name'
+        enduser_name_short: 'Name'
         enduser_city: 'Enduser - City'
+        enduser_city_short: 'City'
         enduser_street: 'Enduser - Street'
+        enduser_street_short: 'Street'
         enduser_house: 'Enduser - House'
+        enduser_house_short: 'House'
         enduser_number: 'Enduser - Number'
+        enduser_number_short: 'Number'
+        applicant: 'Applicant'
         applicant_name: 'Applicant - Name'
+        applicant_name_short: 'Name'
         applicant_city: 'Applicant - City'
+        applicant_city_short: 'City'
         applicant_street: 'Applicant - Street'
+        applicant_street_short: 'Street'
         applicant_house: 'Applicant - House'
+        applicant_house_short: 'House'
         applicant_number: 'Applicant - Number'
+        applicant_number_short: 'Number'
+        station: 'Station'
         station_city: 'Station - City'
+        station_city_short: 'City'
         station_street: 'Station - Street'
+        station_street_short: 'Street'
         station_house: 'Station - House'
+        station_house_short: 'House'
         station_number: 'Station - Number'
+        station_number_short: 'Number'
         lat: 'Station - latitude'
         lng: 'Station - longitude'
       individual_device:
@@ -88,7 +117,7 @@ en:
         emission: 'Emission'
         input_frequency: 'Input frequency'
         output_frequency: 'Output frequency'
-        station_location: 'Station location'
+        station_location: 'Station'
       club_device:
         number: 'Number'
         date_of_issue: 'Date of issue'

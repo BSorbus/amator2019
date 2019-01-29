@@ -1,8 +1,9 @@
 require 'csv'
 class Individual < ApplicationRecord
+  delegate :url_helpers, to: 'Rails.application.routes'
 
-  def fullname
-    "#{number}, #{call_sign}"
+  def number_as_link( loc )
+    "<a href=#{url_helpers.individual_path(self.id, locale: loc)}>#{self.number}</a>".html_safe
   end
 
   # rubocop:disable MethodLength
