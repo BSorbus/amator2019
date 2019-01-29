@@ -91,8 +91,6 @@ class Club < ApplicationRecord
               end 
             end
 
-            sleep 0.25
-
             club = Club.create(
               number:             pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? pozwol.xpath("./*[local-name()='sygnaturaEsod']").text : pozwol.xpath("./*[local-name()='numer']").text,
               date_of_issue:      pozwol.xpath("./*[local-name()='waznaOd']").text,
