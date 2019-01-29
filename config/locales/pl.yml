@@ -43,7 +43,7 @@ pl:
     basic_info:
       fieldset_title: 'Dane podstawowe'
     additional_info:
-      fieldset_title: 'Informacje dodoatkowe'
+      fieldset_title: 'Informacje dodatkowe'
     station_info:
       fieldset_title: 'Stacja'
     station_full_info:
