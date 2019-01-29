@@ -102,7 +102,7 @@ class Club < ApplicationRecord
               transmitter_power:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='moc']").text,
               station_city:       pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='miejscowosc']").text,
               station_street:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='ulica']").text,
-              station_house:      pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrDoku']").text,
+              station_house:      pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrDomu']").text,
               station_number:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrLokalu']").text,
               applicant_name:     pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='nazwa']").text,
               applicant_city:     applicant_city,

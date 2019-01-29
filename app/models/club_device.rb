@@ -113,7 +113,7 @@ class ClubDevice < ApplicationRecord
               output_frequency:   pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='czestotliwoscNad']").map(&:text).uniq.join(", "),
               station_city:       pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='miejscowosc']").text,
               station_street:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='ulica']").text,
-              station_house:      pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrDoku']").text,
+              station_house:      pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrDomu']").text,
               station_number:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrLokalu']").text,
               applicant_name:     pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='nazwa']").text,
               applicant_city:     applicant_city,
