@@ -15,8 +15,8 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
-gem 'therubyracer', platforms: :ruby
+gem 'mini_racer', platforms: :ruby
+#gem 'therubyracer', platforms: :ruby
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
@@ -56,7 +56,7 @@ gem 'bootstrap-sass', '3.3.7'
 gem 'font_awesome5_rails'
 gem 'jquery-rails'
 
-gem 'jquery-datatables', '= 1.10.16' #1.10.19 jakis problem z wyswietlaniem strzalek sortowania
+gem 'jquery-datatables', '= 1.10.16' #1.10.16 bo z .19 jest jakis problem z wyswietlaniem strzalek sortowania
 gem 'ajax-datatables-rails' #, '= 0.4.0' jeżeli wywala się na custom_filter
 
 gem 'redis-rails'
