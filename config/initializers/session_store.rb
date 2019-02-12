@@ -6,5 +6,5 @@ Rails.application.config.session_store :redis_store, {
     { host: Rails.application.secrets.redis_host, port: 6379, db: 0 },
   ],
   expire_after: 60.minutes,
-  key: '_amator2018_session'
+  key: '_amator2019_session'
 }
