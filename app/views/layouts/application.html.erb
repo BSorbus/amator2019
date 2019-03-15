@@ -12,6 +12,8 @@
     <%= javascript_include_tag 'application' %>
     <%= favicon_link_tag asset_path('favicon.ico'), :rel => 'shortcut icon', :type => "image/x-icon" %>
 
+    <%= piwik_tracking_tag %>
+
     <%= yield(:javascript) %> 
 
   </head>

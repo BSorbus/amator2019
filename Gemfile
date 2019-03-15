@@ -72,3 +72,5 @@ gem 'whenever', require: false
 
 gem 'mina'
 gem 'mina-whenever', require: false
+
+gem 'piwik_analytics'
