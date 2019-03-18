@@ -55,7 +55,8 @@ class Club < ApplicationRecord
   end
 
   def self.load_from_pwid(doc)
-    Club.destroy_all
+    #Club.destroy_all
+    ActiveRecord::Base.connection.execute("TRUNCATE clubs RESTART IDENTITY")
     doc.xpath("//*[local-name()='wyszukajPozwoleniaKluboweResponse']").each do |resp|
       resp.xpath("./*[local-name()='return']").each do |ret|
         ret.xpath("./*[local-name()='pozwolenie']").each do |pozwol|

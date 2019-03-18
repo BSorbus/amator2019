@@ -39,7 +39,9 @@ class Individual < ApplicationRecord
   # DecyzjaKontestowa
 
   def self.load_from_pwid(doc)
-    Individual.destroy_all
+    #Individual.destroy_all
+    ActiveRecord::Base.connection.execute("TRUNCATE individuals RESTART IDENTITY")
+
     doc.xpath("//*[local-name()='wyszukajPozwoleniaIndywidualneResponse']").each do |resp|
       resp.xpath("./*[local-name()='return']").each do |ret|
         ret.xpath("./*[local-name()='pozwolenie']").each do |pozwol|

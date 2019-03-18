@@ -28,7 +28,8 @@ class IndividualDevice < ApplicationRecord
   end
 
   def self.load_from_pwid(doc)
-    IndividualDevice.destroy_all
+    #IndividualDevice.destroy_all
+    ActiveRecord::Base.connection.execute("TRUNCATE individual_devices RESTART IDENTITY")
     doc.xpath("//*[local-name()='wyszukajPozwoleniaBezobslugoweResponse']").each do |resp|
       resp.xpath("./*[local-name()='return']").each do |ret|
         ret.xpath("./*[local-name()='pozwolenie']").each do |pozwol|
