@@ -65,8 +65,8 @@ gem "redis", "~> 4.0"
 
 gem 'rack-attack'
 
-#gem "actionpack-page_caching"
-#gem "actionpack-action_caching"
+gem "actionpack-page_caching"
+gem "actionpack-action_caching"
 
 gem 'whenever', require: false
 
