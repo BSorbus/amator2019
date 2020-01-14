@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "UKE Radioamator" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "UKE Radioamator" %>">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Rejestr znaków i pozwoleń krótkofalarskich UKE" %>">
+
+    <meta name="author" content="UKE">
+    <meta name="site" content="UKE Radioamator">
+    <meta name="keywords" content="znak, radioamator, UKE, pozwolenie, pozwolenie, rejestr, wykaz">
+    <meta name="copyright" content="UKE Biuro Informatyki">
 
     <!-- IE Compatible -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +25,84 @@
     <!-- Bootstrap Js CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+
+    <!-- Matomo -->
     <%= piwik_tracking_tag %>
+
+    <!-- SEO -->
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org/",
+      "@type":"Dataset",
+      "name":"Radioamator UKE",
+      "description":"Register of amateur individual and club radio licenses issued by UKE",
+      "url":"https://amator.uke.gov.pl",
+      "keywords":[
+         "UKE > RADIOAMATOR > ZNAK",
+         "UKE > RADIOAMATOR > POZWOLENE"
+      ],
+      "license" : "https://amator.uke.gov.pl",
+      "hasPart" : [
+        {
+          "@type": "Dataset",
+          "name": "Individuals",
+          "description": "Register of radio amateur licenses. A list of authorizations issued for private persons",
+          "license" : "https://amator.uke.gov.pl/individuals"
+        },
+        {
+          "@type": "Dataset",
+          "name": "Clubs",
+          "description": "Register of radio amateur licenses. A list of authorizations issued for legal entity",
+          "license" : "https://amator.uke.gov.pl/pl/clubs"
+        },
+        {
+          "@type": "Dataset",
+          "name": "Individual devices",
+          "description": "Register of radio amateur licenses. A list of authorizations issued for private persons - automatic stations",
+          "license" : "https://amator.uke.gov.pl/pl/individual_devices"
+        },
+        {
+          "@type": "Dataset",
+          "name": "Club devices",
+          "description": "Register of radio amateur licenses. A list of authorizations issued for legal entity - automatic stations",
+          "license" : "https://amator.uke.gov.pl/pl/club_devices"
+        }
+      ],
+      "creator":{
+         "@type":"Organization",
+         "url": "https://www.uke.gov.pl/en/",
+       "sameAs": "https://ror.org/04rjsxs58",
+         "name":"President of the Office of Electronic Communications",
+         "contactPoint": {
+        "@type": "ContactPoint",
+            "telephone": "+48-22-53-49-125",
+            "contactType": "Customer service"
+          }
+      },
+      "distribution":[
+         {
+            "@type":"DataDownload",
+            "encodingFormat":"CSV",
+            "contentUrl":"https://amator.uke.gov.pl/pl/individuals/export.csv"
+         },
+         {
+            "@type":"DataDownload",
+            "encodingFormat":"CSV",
+            "contentUrl":"https://amator.uke.gov.pl/pl/clubs/export.csv"
+         },
+         {
+            "@type":"DataDownload",
+            "encodingFormat":"CSV",
+            "contentUrl":"https://amator.uke.gov.pl/pl/individual_devices/export.csv"
+         },
+         {
+            "@type":"DataDownload",
+            "encodingFormat":"CSV",
+            "contentUrl":"https://amator.uke.gov.pl/pl/club_devices/export.csv"
+         }
+      ]
+    }
+    </script>
   </head>
 
   <body>
