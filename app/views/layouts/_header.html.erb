@@ -20,38 +20,13 @@
 
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <nav>
-
+<!-- 
         <ul class="nav navbar-nav navbar-left">
+          <%#= render 'layouts/navigation_left_links' %>
         </ul>
-
+ -->
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to individuals_path do %>
-            <span class="fa fa-user"></span>&nbsp;<%=t "individuals.index.navbar" %>
-            <% end %>
-          </li>
-          <li><%= link_to clubs_path do %>
-            <span class="fa fa-flag"></span>&nbsp;<%=t "clubs.index.navbar" %>
-            <% end %>
-          </li>
-          <li><%= link_to individual_devices_path do %>
-            <span class="fa fa-tty"></span>&nbsp;<%=t "individual_devices.index.navbar" %>
-            <% end %>
-          </li>
-          <li><%= link_to club_devices_path do %>
-            <span class="fa fa-satellite-dish"></span>&nbsp;<%=t "club_devices.index.navbar" %>
-            <% end %>
-          </li>
-
-          <% unless "#{locale}" == "en" %>
-            <li>
-              <%= link_to image_tag('en.png', alt: 'EN', class: "img img-thumbnail", width: 28), { locale: :en } %>
-            </li>
-          <% end %>
-          <% unless "#{locale}" == "pl" %>
-            <li>
-              <%= link_to image_tag('pl.png', alt: 'PL', class: "img img-thumbnail", width: 28), { locale: :pl } %>
-            </li>
-          <% end %>
+          <%= render 'layouts/navigation_right_links' %>
         </ul>
 
       </nav>

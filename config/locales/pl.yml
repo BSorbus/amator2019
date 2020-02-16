@@ -2,6 +2,9 @@ pl:
   logo_file: "radioamator_pl.png"
   logo_link: "http://www.uke.gov.pl"
   layouts:
+    header:
+      menu:
+        data: 'Rejestry'
     footer:
       brand: 'Urząd Komunikacji Elektronicznej'
       brand_address_1: 'ul. Giełdowa 7/9'
