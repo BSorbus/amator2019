@@ -28,6 +28,7 @@ $(document).ready(function() {
     serverSide: true,
     deferRender: true,
     searchDelay: 500,
+    stateSave: true,
     ajax: { 
       url: $('#individual_devices-datatable').data('source'),
       type: "GET",
@@ -63,8 +64,20 @@ $(document).ready(function() {
     language: {
       //url: $('#individual_devices-datatable').data('locale') "<%= Rails.application.routes.url_helpers.datatables_lang_path(locale: I18n.locale, format: :json) %>"
       url: $('#individual_devices-datatable').data('locale_url')
+    },
+    stateSaveCallback: function(settings,data) {
+      localStorage.setItem( 'DataTables_individual_devices-datatable_/en-pl/individual_devices', JSON.stringify(data) )
+    },
+    stateLoadCallback: function(settings) {
+      return JSON.parse( localStorage.getItem( 'DataTables_individual_devices-datatable_/en-pl/individual_devices' ) )
     }
+
   });
  
+
+  $(".individual_devices_table_link").on("click", function(){
+    //$('#individual_devices-datatable').DataTable().state.clear();
+    oIndividualDevicesTable.state.clear();
+  });
 
 });

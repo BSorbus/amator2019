@@ -28,6 +28,7 @@ $(document).ready(function() {
     serverSide: true,
     deferRender: true,
     searchDelay: 500,
+    stateSave: true,
     ajax: { 
       url: $('#clubs-datatable').data('source'),
       type: "GET",
@@ -60,8 +61,21 @@ $(document).ready(function() {
     language: {
       //url: $('#clubs-datatable').data('locale') "<%= Rails.application.routes.url_helpers.datatables_lang_path(locale: I18n.locale, format: :json) %>"
       url: $('#clubs-datatable').data('locale_url')
+    },
+    stateSaveCallback: function(settings,data) {
+      localStorage.setItem( 'DataTables_clubs-datatable_/en-pl/clubs', JSON.stringify(data) )
+    },
+    stateLoadCallback: function(settings) {
+      return JSON.parse( localStorage.getItem( 'DataTables_clubs-datatable_/en-pl/clubs' ) )
     }
+
   });
  
+ 
+
+  $(".clubs_table_link").on("click", function(){
+    //$('#clubs-datatable').DataTable().state.clear();
+    oClubsTable.state.clear();
+  });
 
 });

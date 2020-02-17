@@ -58,6 +58,7 @@ $(document).ready(function() {
     serverSide: true,
     deferRender: true,
     searchDelay: 500,
+    stateSave: true,
     ajax: { 
       url: $('#individuals-datatable').data('source'),
       type: "GET",
@@ -89,8 +90,19 @@ $(document).ready(function() {
     language: {
       //url: $('#individuals-datatable').data('locale') "<%= Rails.application.routes.url_helpers.datatables_lang_path(locale: I18n.locale, format: :json) %>"
       url: $('#individuals-datatable').data('locale_url')
+    },
+    stateSaveCallback: function(settings,data) {
+      localStorage.setItem( 'DataTables_individuals-datatable_/en-pl/individuals', JSON.stringify(data) )
+    },
+    stateLoadCallback: function(settings) {
+      return JSON.parse( localStorage.getItem( 'DataTables_individuals-datatable_/en-pl/individuals' ) )
     }
+
   });
  
+  $(".individuals_table_link").on("click", function(){
+    //$('#individuals-datatable').DataTable().state.clear();
+    oIndividualsTable.state.clear();
+  });
 
 });
