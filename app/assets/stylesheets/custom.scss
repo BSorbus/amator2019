@@ -187,3 +187,24 @@ legend.my-fieldset {
     padding:0 10px;
     border-bottom:none;
 }
+
+/*
+.carousel-caption {
+    position: absolute;
+    left: 0;
+    top: 0px; 
+    padding-left: 1%;
+    padding-top: 0;
+    padding-bottom: 0;
+    color: #fff;
+    text-align: left;
+    z-index: 10;
+}
+*/
+.carousel-indicators {
+  position: absolute;
+  left: 0px;
+  bottom: 0;
+  padding-left: 60px;
+  height: 15px;
+}
