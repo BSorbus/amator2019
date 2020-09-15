@@ -245,6 +245,7 @@ DEPENDENCIES
   pg
   piwik_analytics
   puma (~> 4.3.5)
+  rack
   rack-attack
   rails (~> 5.2.4.4)
   redis (~> 4.0)
