@@ -1,9 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1 class="center">
-        <span class="index-title"><%= t '.title' %></span>
-      </h1>
+      <h1 class="center index-title"><%= t '.title' %></h1>
     </div> <!--/col-sm-12 -->
   </div> <!--/row -->
 
@@ -25,7 +23,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <%= image_tag("individuals.jpg") %>
+            <%= image_tag("individuals.jpg", alt: "slide 0") %>
             <div class="carousel-caption">
               <%= link_to individuals_path do %>
                 <span class="btn btn-primary btn-lg"><%= t("individuals.index.navbar") %></span>
@@ -33,7 +31,7 @@
             </div>
           </div>
           <div class="item">
-            <%= image_tag("clubs.jpg") %>
+            <%= image_tag("clubs.jpg", alt: "slide 1") %>
             <div class="carousel-caption">
               <%= link_to clubs_path do %>
                 <span class="btn btn-primary btn-lg"><%= t("clubs.index.navbar") %></span>
@@ -41,7 +39,7 @@
             </div>
           </div>
           <div class="item">
-            <%= image_tag("individual_devices.jpg") %>
+            <%= image_tag("individual_devices.jpg", alt: "slide 2") %>
             <div class="carousel-caption">
               <%= link_to individual_devices_path do %>
                 <span class="btn btn-primary btn-lg"><%= t("individual_devices.index.navbar") %></span>
@@ -49,7 +47,7 @@
             </div>
           </div>
           <div class="item">
-            <%= image_tag("club_devices.jpg") %>
+            <%= image_tag("club_devices.jpg", alt: "slide 3") %>
             <div class="carousel-caption">
               <%= link_to club_devices_path do %>
                 <span class="btn btn-primary btn-lg"><%= t("club_devices.index.navbar") %></span>
