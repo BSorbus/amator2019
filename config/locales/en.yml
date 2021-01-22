@@ -18,6 +18,9 @@ en:
   static_pages:
     home:
       title: 'Register of radio amateur licenses'
+    declaration:
+      title: 'Accessibility declaration'
+      navbar: 'Accessibility declaration'
   individuals:
     index:
       title: 'A list of authorizations issued for private persons'

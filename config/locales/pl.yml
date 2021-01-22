@@ -18,6 +18,9 @@ pl:
   static_pages:
     home:
       title: 'Rejestr radioamatorskich pozwoleń radiowych'
+    declaration:
+      title: 'Deklaracja dostępności'
+      navbar: 'Deklaracja dostępności'
   individuals:
     index:
       title: 'Wykaz pozwoleń wydanych osobom fizycznym'
