@@ -29,7 +29,7 @@ module PwidModule
   # ef0f8b6ffb699f90933a3321b00ff6769e018b94
 
   API_PROTOCOL = "https"
-  API_SERVER = "10.100.2.64"
+  API_SERVER = "10.100.2.216" # stary: "10.100.2.64"
   API_PWID_USER = "amator.api@uke.gov.pl"
   API_PWID_USER_PASS = nil
   API_PWID_USER_PASS_SHA1 = 'ef0f8b6ffb699f90933a3321b00ff6769e018b94'
