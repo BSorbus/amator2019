@@ -11,6 +11,6 @@ set :environment, :production
 set :output, "#{Rails.root}/log/cron_log.log"
 
 
-every '45 4 * * 1-5' do
+every '15 6 * * 1-5' do
   rake "cronjobs:pwid_sync"
 end
