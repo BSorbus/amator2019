@@ -80,14 +80,19 @@ class Rack::Attack
   # end
 
 
- # Send the following response to throttled clients
-  self.throttled_response = ->(env) {
-    retry_after = (env['rack.attack.match_data'] || {})[:period]
-    [
-      429,
-      {'Retry-After' => retry_after.to_s},
-      [{error: "Throttle limit reached. Retry later."}.to_json]
-    ]
-  }
+ # # Send the following response to throttled clients
+ #  self.throttled_response = ->(env) {
+ #    retry_after = (env['rack.attack.match_data'] || {})[:period]
+ #    [
+ #      429,
+ #      {'Retry-After' => retry_after.to_s},
+ #      [{error: "Throttle limit reached. Retry later."}.to_json]
+ #    ]
+ #  }
+
+
+  throttle('req/ip', limit: 300, period: 5.minutes) do |req|
+    req.ip # unless req.path.start_with?('/assets')
+  end
 
 end
