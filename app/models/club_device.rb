@@ -62,78 +62,84 @@ class ClubDevice < ApplicationRecord
   end
 
   def self.load_from_pwid(doc)
-    #ClubDevice.destroy_all
-    ActiveRecord::Base.connection.execute("TRUNCATE club_devices RESTART IDENTITY")
-    doc.xpath("//*[local-name()='wyszukajPozwoleniaBezobslugoweResponse']").each do |resp|
-      resp.xpath("./*[local-name()='return']").each do |ret|
-        ret.xpath("./*[local-name()='pozwolenie']").each do |pozwol|
+    if doc.xpath("//*[local-name()='wyszukajPozwoleniaBezobslugoweResponse']").present? 
+      #ClubDevice.destroy_all
+      ActiveRecord::Base.connection.execute("TRUNCATE club_devices RESTART IDENTITY")
+      doc.xpath("//*[local-name()='wyszukajPozwoleniaBezobslugoweResponse']").each do |resp|
+        resp.xpath("./*[local-name()='return']").each do |ret|
+          ret.xpath("./*[local-name()='pozwolenie']").each do |pozwol|
 
-          if pozwol.xpath("./*[local-name()='status']").text == 'Aktualna' && pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='fizyczny']").text == 'false'
+            if pozwol.xpath("./*[local-name()='status']").text == 'Aktualna' && pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='fizyczny']").text == 'false'
 
-            applicant_city = ''
-            applicant_street = ''
-            applicant_house = ''
-            applicant_number = ''
+              applicant_city = ''
+              applicant_street = ''
+              applicant_house = ''
+              applicant_number = ''
 
-            pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='adresy']").xpath("./*[local-name()='adres']").each do |applicant_address|
-              if applicant_address.xpath("./*[local-name()='rodzajAdresu']").text == 'siedziby'
-                applicant_city    = applicant_address.xpath("./*[local-name()='miejscowosc']").text
-                applicant_street  = applicant_address.xpath("./*[local-name()='ulica']").text 
-                applicant_house   = applicant_address.xpath("./*[local-name()='nrDomu']").text
-                applicant_number  = applicant_address.xpath("./*[local-name()='nrLokalu']").text
-              end 
+              pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='adresy']").xpath("./*[local-name()='adres']").each do |applicant_address|
+                if applicant_address.xpath("./*[local-name()='rodzajAdresu']").text == 'siedziby'
+                  applicant_city    = applicant_address.xpath("./*[local-name()='miejscowosc']").text
+                  applicant_street  = applicant_address.xpath("./*[local-name()='ulica']").text 
+                  applicant_house   = applicant_address.xpath("./*[local-name()='nrDomu']").text
+                  applicant_number  = applicant_address.xpath("./*[local-name()='nrLokalu']").text
+                end 
+              end
+
+
+              enduser_city = ''
+              enduser_street = ''
+              enduser_house = ''
+              enduser_number = ''
+
+              pozwol.xpath("./*[local-name()='uzytkownik']").xpath("./*[local-name()='adresy']").xpath("./*[local-name()='adres']").each do |enduser_address|
+                if enduser_address.xpath("./*[local-name()='rodzajAdresu']").text == 'siedziby'
+                  enduser_city    = enduser_address.xpath("./*[local-name()='miejscowosc']").text
+                  enduser_street  = enduser_address.xpath("./*[local-name()='ulica']").text 
+                  enduser_house   = enduser_address.xpath("./*[local-name()='nrDomu']").text
+                  enduser_number  = enduser_address.xpath("./*[local-name()='nrLokalu']").text
+                end 
+              end
+
+              club_mf_device = ClubDevice.create(
+                number:             pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? pozwol.xpath("./*[local-name()='sygnaturaEsod']").text : pozwol.xpath("./*[local-name()='numer']").text,
+                date_of_issue:      pozwol.xpath("./*[local-name()='waznaOd']").text,
+                valid_to:           pozwol.xpath("./*[local-name()='waznaDo']").text,
+                call_sign:          pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='znak']").text,
+                category:           pozwol.xpath("./*[local-name()='wniosek']").xpath("./*[local-name()='kategoria']").text,
+                transmitter_power:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='moc']").text,
+                name_type_station:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='przeznaczenie']").map(&:text).uniq.join(", "),
+                emission:           pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='emisja']").map(&:text).uniq.join(", "),
+                input_frequency:    pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='czestotliwoscOdb']").map(&:text).uniq.join(", "),
+                output_frequency:   pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='czestotliwoscNad']").map(&:text).uniq.join(", "),
+                station_city:       pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='miejscowosc']").text,
+                station_street:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='ulica']").text,
+                station_house:      pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrDomu']").text,
+                station_number:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrLokalu']").text,
+                applicant_name:     pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='nazwa']").text,
+                applicant_city:     applicant_city,
+                applicant_street:   applicant_street,
+                applicant_house:    applicant_house,
+                applicant_number:   applicant_number,
+                enduser_name:       pozwol.xpath("./*[local-name()='uzytkownik']").xpath("./*[local-name()='nazwa']").text,
+                enduser_city:       enduser_city,
+                enduser_street:     enduser_street,
+                enduser_house:      enduser_house,
+                enduser_number:     enduser_number
+              )
+
+              puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text + "   GEOCODER:   lat: #{club_mf_device.lat} lng: #{club_mf_device.lng}"
+            else
+              puts '******************** NIEAKTUALNE lub FIZYCZNY=true ********************'
+              puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text
+              puts pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? "#{pozwol.xpath("./*[local-name()='sygnaturaEsod']").text}" : "#{pozwol.xpath("./*[local-name()='numer']").text}"
             end
-
-
-            enduser_city = ''
-            enduser_street = ''
-            enduser_house = ''
-            enduser_number = ''
-
-            pozwol.xpath("./*[local-name()='uzytkownik']").xpath("./*[local-name()='adresy']").xpath("./*[local-name()='adres']").each do |enduser_address|
-              if enduser_address.xpath("./*[local-name()='rodzajAdresu']").text == 'siedziby'
-                enduser_city    = enduser_address.xpath("./*[local-name()='miejscowosc']").text
-                enduser_street  = enduser_address.xpath("./*[local-name()='ulica']").text 
-                enduser_house   = enduser_address.xpath("./*[local-name()='nrDomu']").text
-                enduser_number  = enduser_address.xpath("./*[local-name()='nrLokalu']").text
-              end 
-            end
-
-            club_mf_device = ClubDevice.create(
-              number:             pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? pozwol.xpath("./*[local-name()='sygnaturaEsod']").text : pozwol.xpath("./*[local-name()='numer']").text,
-              date_of_issue:      pozwol.xpath("./*[local-name()='waznaOd']").text,
-              valid_to:           pozwol.xpath("./*[local-name()='waznaDo']").text,
-              call_sign:          pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='znak']").text,
-              category:           pozwol.xpath("./*[local-name()='wniosek']").xpath("./*[local-name()='kategoria']").text,
-              transmitter_power:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='moc']").text,
-              name_type_station:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='przeznaczenie']").map(&:text).uniq.join(", "),
-              emission:           pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='emisja']").map(&:text).uniq.join(", "),
-              input_frequency:    pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='czestotliwoscOdb']").map(&:text).uniq.join(", "),
-              output_frequency:   pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='parametry']").xpath("./*[local-name()='parametr']").xpath("./*[local-name()='czestotliwoscNad']").map(&:text).uniq.join(", "),
-              station_city:       pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='miejscowosc']").text,
-              station_street:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='ulica']").text,
-              station_house:      pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrDomu']").text,
-              station_number:     pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='nrLokalu']").text,
-              applicant_name:     pozwol.xpath("./*[local-name()='wnioskodawca']").xpath("./*[local-name()='nazwa']").text,
-              applicant_city:     applicant_city,
-              applicant_street:   applicant_street,
-              applicant_house:    applicant_house,
-              applicant_number:   applicant_number,
-              enduser_name:       pozwol.xpath("./*[local-name()='uzytkownik']").xpath("./*[local-name()='nazwa']").text,
-              enduser_city:       enduser_city,
-              enduser_street:     enduser_street,
-              enduser_house:      enduser_house,
-              enduser_number:     enduser_number
-            )
-
-            puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text + "   GEOCODER:   lat: #{club_mf_device.lat} lng: #{club_mf_device.lng}"
-          else
-            puts '******************** NIEAKTUALNE lub FIZYCZNY=true ********************'
-            puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text
-            puts pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? "#{pozwol.xpath("./*[local-name()='sygnaturaEsod']").text}" : "#{pozwol.xpath("./*[local-name()='numer']").text}"
           end
         end
       end
+    else
+      # wyslij e-mail
+      AmatorMailer.api_pwid_error(self.class.name, doc).deliver_now
     end
   end  
+
 end

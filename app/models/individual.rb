@@ -39,33 +39,38 @@ class Individual < ApplicationRecord
   # DecyzjaKontestowa
 
   def self.load_from_pwid(doc)
-    #Individual.destroy_all
-    ActiveRecord::Base.connection.execute("TRUNCATE individuals RESTART IDENTITY")
+    if doc.xpath("//*[local-name()='wyszukajPozwoleniaIndywidualneResponse']").present?
+      #Individual.destroy_all
+      ActiveRecord::Base.connection.execute("TRUNCATE individuals RESTART IDENTITY")
+      doc.xpath("//*[local-name()='wyszukajPozwoleniaIndywidualneResponse']").each do |resp|
+        resp.xpath("./*[local-name()='return']").each do |ret|
+          ret.xpath("./*[local-name()='pozwolenie']").each do |pozwol|
+            if pozwol.xpath("./*[local-name()='status']").text == 'Aktualna'
+              # puts pozwol.xpath("./*[local-name()='id']").text
+              Individual.create(
+                number:             pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? pozwol.xpath("./*[local-name()='sygnaturaEsod']").text : pozwol.xpath("./*[local-name()='numer']").text,
+                date_of_issue:      pozwol.xpath("./*[local-name()='waznaOd']").text,
+                valid_to:           pozwol.xpath("./*[local-name()='waznaDo']").text,
+                call_sign:          pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='znak']").text,
+                category:           pozwol.xpath("./*[local-name()='wniosek']").xpath("./*[local-name()='kategoria']").text,
+                transmitter_power:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='moc']").text,
+                station_location:   pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='miejscowosc']").text
+              )
 
-    doc.xpath("//*[local-name()='wyszukajPozwoleniaIndywidualneResponse']").each do |resp|
-      resp.xpath("./*[local-name()='return']").each do |ret|
-        ret.xpath("./*[local-name()='pozwolenie']").each do |pozwol|
-          if pozwol.xpath("./*[local-name()='status']").text == 'Aktualna'
-            # puts pozwol.xpath("./*[local-name()='id']").text
-            Individual.create(
-              number:             pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? pozwol.xpath("./*[local-name()='sygnaturaEsod']").text : pozwol.xpath("./*[local-name()='numer']").text,
-              date_of_issue:      pozwol.xpath("./*[local-name()='waznaOd']").text,
-              valid_to:           pozwol.xpath("./*[local-name()='waznaDo']").text,
-              call_sign:          pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='znak']").text,
-              category:           pozwol.xpath("./*[local-name()='wniosek']").xpath("./*[local-name()='kategoria']").text,
-              transmitter_power:  pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='moc']").text,
-              station_location:   pozwol.xpath("./*[local-name()='stacja']").xpath("./*[local-name()='adres']").xpath("./*[local-name()='miejscowosc']").text
-            )
+              puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text
+            else
+              puts '******************** NIEAKTUALNE ********************'
+              puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text
+              puts pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? "#{pozwol.xpath("./*[local-name()='sygnaturaEsod']").text}" : "#{pozwol.xpath("./*[local-name()='numer']").text}"
+            end
 
-            puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text
-          else
-            puts '******************** NIEAKTUALNE ********************'
-            puts 'id: '    + pozwol.xpath("./*[local-name()='id']").text
-            puts pozwol.xpath("./*[local-name()='sygnaturaEsod']").text.present? ? "#{pozwol.xpath("./*[local-name()='sygnaturaEsod']").text}" : "#{pozwol.xpath("./*[local-name()='numer']").text}"
           end
-
         end
       end
+    else
+      # wyslij e-mail
+      AmatorMailer.api_pwid_error(self.class.name, doc).deliver_now
     end
   end
+
 end

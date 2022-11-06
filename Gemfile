@@ -78,3 +78,4 @@ gem 'mina-whenever', require: false
 
 gem 'piwik_analytics'
 gem "addressable", ">= 2.8.1"
+gem 'inky-rb', require: 'inky'
