@@ -19,7 +19,7 @@
 
   <row>
     <columns>
-      <p>W programie <strong>UKE Amator</strong> została wykryto błąd połączenia do API PWID</p>
+      <p>W programie <strong>UKE Amator</strong> został wykryty błąd połączenia do API PWID (<%= @attr_component %>)</p>
     </columns>
   </row>
 

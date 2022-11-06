@@ -9,8 +9,9 @@ class AmatorMailer < ApplicationMailer
 
   after_action :attach_metadata
 
-  def api_pwid_error(model_name, component)
-    @attr_component = component
+  def api_pwid_error(model_class, component)
+#    @attr_component = component
+    @attr_component = model_class
 
     @component = component
 
@@ -18,7 +19,7 @@ class AmatorMailer < ApplicationMailer
     attachments.inline['logo_uke'] = File.read("app/assets/images/logo_uke_pl_do_lewej_small.png")
 
     # mail(to: @recipient.email, cc: sending_user.email, subject: "#{t('title')} - #{@component_fullname}" )
-    mail(to: 'bsorbus@gmail.com', subject: "zulugula" )
+    mail(to: "#{Rails.application.secrets.email_api_pwid_error_recipients}", subject: "Błąd połączenia API-PWID" )
   end
 
   private

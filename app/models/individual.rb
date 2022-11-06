@@ -69,7 +69,7 @@ class Individual < ApplicationRecord
       end
     else
       # wyslij e-mail
-      AmatorMailer.api_pwid_error(self.class.name, doc).deliver_now
+      AmatorMailer.api_pwid_error(self, doc).deliver_now
     end
   end
 
