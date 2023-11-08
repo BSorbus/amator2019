@@ -245,7 +245,6 @@ DEPENDENCIES
   brakeman
   byebug
   font_awesome5_rails
-  globalid (> 1.0.1)
   hiredis
   inky-rb
   jbuilder (~> 2.5)
