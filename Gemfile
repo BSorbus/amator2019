@@ -65,7 +65,7 @@ gem 'redis-rails'
 gem "hiredis"
 gem "redis", "~> 4.0"
 
-gem 'rack'
+gem 'rack', "> 2.2.6.2"
 gem 'rack-attack'
 
 gem "actionpack-page_caching", ">= 1.2.2"
@@ -79,3 +79,5 @@ gem 'mina-whenever', require: false
 gem 'piwik_analytics'
 gem "addressable", ">= 2.8.1"
 gem 'inky-rb', require: 'inky'
+gem "mail", "= 2.7.1"
+gem "globalid", "> 1.0.1"
