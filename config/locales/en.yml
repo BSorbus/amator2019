@@ -5,6 +5,8 @@ en:
     header:
       menu:
         data: 'Registers'
+        buttons:
+          change_display_mode: 'Switch display mode: light or dark'
     footer:
       brand: 'Office of Electronic Communications'
       brand_address_1: '7/9 Giełdowa Street'

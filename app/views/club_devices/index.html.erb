@@ -17,6 +17,7 @@
         data-source="<%= club_devices_path(format: :json) %>", 
         data-locale_url="<%= datatables_lang_path(format: :json) %>", 
         data-export_csv_url="<%= export_club_devices_path(format: :csv) %>">
+        <caption style="caption-side: bottom;"><%= t '.title' %></caption>
         <thead>
           <tr>
             <th>id</th>

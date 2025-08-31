@@ -1,0 +1,35 @@
+[data-theme="dark"] {
+
+fieldset.my-fieldset {
+    border: 1px groove #333 !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+}
+
+fieldset.my-fieldset-short {
+    border: 1px groove #333 !important;
+    padding: 0 1.4em 0 1.4em !important;
+    margin: 0 0 0 0 !important;
+}
+
+legend.my-fieldset {
+    color: #ccc !important;
+    font-size: 1.1em !important;
+    font-weight: normal !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+}
+
+legend.my-fieldset.legend-big {
+    color: #ccc !important;
+    font-size: 1.4em !important;
+    font-weight: normal !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+}
+
+}

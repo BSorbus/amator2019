@@ -21,11 +21,11 @@ $font-size-base: 14px;
 //$btn-default-border:             #ccc !default;
 
 
-$brand-primary:     #1B3C8F;
-$brand-success:     #5cb85c;
-$brand-info:        #5bc0de;
-$brand-warning:     #f0ad4e;
-$brand-danger:      #d9534f;
+//$brand-primary:     #1B3C8F;
+//$brand-success:     #5cb85c;
+//$brand-info:        #5bc0de;
+//$brand-warning:     #f0ad4e;
+//$brand-danger:      #d9534f;
 
 
 //$brand-primary:          darken(#428bca, 6.5%) !default; // #337ab7
@@ -170,31 +170,6 @@ footer {
 
 //--------------------------------------------------------------------------
 
-
-fieldset.my-fieldset {
-    border: 1px groove #ddd !important;
-    padding: 0 1.4em 1.4em 1.4em !important;
-    margin: 0 0 1.5em 0 !important;
-    -webkit-box-shadow:  0px 0px 0px 0px #000;
-            box-shadow:  0px 0px 0px 0px #000;
-}
-
-fieldset.my-fieldset-short {
-    border: 1px groove #ddd !important;
-    padding: 0 1.4em 0 1.4em !important;
-    margin: 0 0 0 0 !important;
-    -webkit-box-shadow:  0px 0px 0px 0px #000;
-            box-shadow:  0px 0px 0px 0px #000;
-}
-
-legend.my-fieldset {
-    font-size: 1.2em !important;
-    font-weight: normal !important;
-    text-align: left !important;
-    width:auto;
-    padding:0 10px;
-    border-bottom:none;
-}
 
 /*
 .carousel-caption {

@@ -5,6 +5,8 @@ pl:
     header:
       menu:
         data: 'Rejestry'
+        buttons:
+          change_display_mode: 'Zmień wygląd strony: tryb jasny lub ciemny'
     footer:
       brand: 'Urząd Komunikacji Elektronicznej'
       brand_address_1: 'ul. Giełdowa 7/9'
